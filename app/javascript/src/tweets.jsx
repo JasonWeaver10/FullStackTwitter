@@ -36,7 +36,7 @@ class Tweets extends Component {
     let deleteNumber = e.target.dataset.id;
     const csrfToken = document.querySelector("[name='csrf-token']").content;
 
-    fetch('./api/tweets/' + deleteNumber, {
+    fetch('https://jasonfullstacktwitter.herokuapp.com/api/tweets/' + deleteNumber, {
       method: 'DELETE',
       mode: 'cors',
       headers: {
