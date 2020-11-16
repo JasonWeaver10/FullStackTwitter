@@ -1,0 +1,23 @@
+
+
+  .footerContainer {
+    flex: 1;
+    background: beige;
+    margin: 0 -8px -8px -8px;
+    border-top: 2px solid blueviolet;
+
+
+    .footer {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 10fr 1fr;
+      grid-template-rows: 30px;
+      height: 60px;
+
+      .footerInfo {
+        color: blueviolet;
+        grid-column-start: 2;
+        grid-column-end: 3;
+      }
+    }
+  }

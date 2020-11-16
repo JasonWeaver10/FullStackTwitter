@@ -1,0 +1,87 @@
+.headerDiv {
+  height: 2.5rem;
+  margin-bottom: 5em;
+  text-align: center;
+  flex: 3;
+}
+
+
+@media only screen and (min-width: 320px) and (max-width: 790px) {
+  a {
+    background-color: black;
+  }
+
+}
+
+@media screen and (min-width: 800px) {
+  .mobileNav {
+    display: none;
+  }
+
+  .header {
+    box-sizing: border-box;
+    width: 100%;
+    height: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 25px 25px;
+    grid-gap: 20px;
+
+    .mainTitle {
+      grid-column-start: 2;
+      grid-column-end: 4;
+      grid-row-start: 1;
+      display: inline-block;
+      color: blueviolet;
+      width: 100px;
+      margin-bottom: 20px;
+    }
+
+    .logoutButton {
+      grid-column-start: 5;
+      grid-row-start: 2;
+      background-color: blueviolet;
+      color: white;
+      border-radius: 50px;
+      box-shadow: 3px 3px #888888;
+      width: 100px;
+
+      &:hover {
+        color: blueviolet;
+        background-color: white;
+        border: 2px solid blueviolet;
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+      border: 2px solid blueviolet;
+      background-color: blueviolet;
+      border-radius: 50px;
+      box-shadow: 3px 3px #888888;
+      width: 8em;
+      font-weight: 600;
+
+      &:hover {
+        color: blueviolet;
+        background-color: white;
+      }
+    }
+
+    .homeLink {
+      grid-column-start: 2;
+      grid-row-start: 2;
+    }
+
+    .usersLink {
+      grid-column-start: 3;
+      grid-row-start: 2;
+    }
+
+    .newLink {
+      grid-column-start: 4;
+      grid-row-start: 2;
+    }
+  }
+}
