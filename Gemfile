@@ -28,7 +28,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'paperclip', '~> 6.1'
 
-gem 'aws-sdk', '~> 3.0'
+# gem 'aws-sdk', '~> 3.0'
 
 gem 'textacular'
 
