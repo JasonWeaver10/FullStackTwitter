@@ -26,7 +26,7 @@ Rails.application.configure do
   config.assets.compile = false
 
   # Using the Amazon settings for Active Storage
-  config.active_storage.service = :amazon
+  # config.active_storage.service = :amazon
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
