@@ -29,7 +29,7 @@ class NewTweet extends Component {
                             }
                           })
     };
-    fetch('./api/tweets', requestOptions)
+    fetch('https://jasonfullstacktwitter.herokuapp.com/api/tweets', requestOptions)
       .then(response => response.json())
     
     this.setState({ redirect: '/tweets'});
