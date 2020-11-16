@@ -45,6 +45,7 @@ class Tweets extends Component {
       },
     })
     this.fetchTweet();
+    this.fetchTweet();
   }
 
   showUserTweets(e) {
