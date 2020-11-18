@@ -15,40 +15,45 @@ class Tweets extends Component {
     this.fetchTweet = this.fetchTweet.bind(this);
   }
 
-  fetchTweet() {
+  async fetchTweet() {
     let reset = document.querySelector('.resetButton');
     let userButton = document.querySelectorAll('.userButton');
     reset.classList.add("hidden");
     userButton.forEach((item) => {
       item.classList.remove("hidden");
     })
-
-    fetch("./api/tweets")
-        .then((res) => res.json())
-        .then((data) => data.tweets)
-        .then((tweet) => {
-            this.setState({tweets: tweet});
-          }).catch((e) => console.log(e));
+    try {
+      let response = await fetch("./api/tweets");
+      let data = await response.json();
+      console.log(data.tweets);
+      this.setState({tweets: data.tweets});
+    } catch (err) {
+      alert(err);
+    }
+   
   };
 
-  handleDelete(e) {
+  async handleDelete(e) {
     e.preventDefault()
     let deleteNumber = e.target.dataset.id;
     const csrfToken = document.querySelector("[name='csrf-token']").content;
 
-    fetch('https://jasonfullstacktwitter.herokuapp.com/api/tweets/' + deleteNumber, {
-      method: 'DELETE',
-      mode: 'cors',
-      headers: {
-        'X-CSRF-Token': csrfToken,
-        "Content-Type": 'application/json'
-      },
-    })
-    this.fetchTweet();
-    this.fetchTweet();
+    try {
+      await fetch('./api/tweets/' + deleteNumber, {
+        method: 'DELETE',
+        mode: 'cors',
+        headers: {
+          'X-CSRF-Token': csrfToken,
+          "Content-Type": 'application/json'
+        },
+      })
+      this.fetchTweet();
+    } catch(err) {
+      alert(err);
+    }
   }
 
-  showUserTweets(e) {
+  async showUserTweets(e) {
     let reset = document.querySelector('.resetButton');
     let userButton = document.querySelectorAll('.userButton');
     userButton.forEach((item) => {
@@ -56,12 +61,14 @@ class Tweets extends Component {
     });
     reset.classList.remove("hidden");
     let userTweets = e.target.dataset.id;
-      fetch("./api/users/" + userTweets + "/tweets")
-          .then((res) => res.json())
-          .then((data) => data.tweets)
-          .then((tweet) => {
-              this.setState({tweets: tweet});
-            }).catch((e) => console.log(e));
+    try {
+      let response = await fetch("./api/users/" + userTweets + "/tweets");
+      let data = await response.json();
+      this.setState({tweets: data.tweets});
+    } catch(err) {
+      alert(err);
+    }
+    
   };
 
   componentDidMount() {

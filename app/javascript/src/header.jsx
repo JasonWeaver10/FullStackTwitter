@@ -14,7 +14,7 @@ class Header extends Component {
   handleLogout() {
   const csrfToken = document.querySelector("[name='csrf-token']").content;
 
-    fetch('https://jasonfullstacktwitter.herokuapp.com/api/sessions', {
+    fetch('./api/sessions', {
       method: 'delete',
       headers: {
         'X-CSRF-Token': csrfToken,

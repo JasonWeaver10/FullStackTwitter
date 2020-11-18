@@ -37,7 +37,7 @@ class Login extends Component {
                   };
     const csrfToken = document.querySelector("[name='csrf-token']").content;
 
-    fetch('https://jasonfullstacktwitter.herokuapp.com/api/users', {
+    fetch('./api/users', {
       method: 'post',
       headers: {
         'X-CSRF-Token': csrfToken,
