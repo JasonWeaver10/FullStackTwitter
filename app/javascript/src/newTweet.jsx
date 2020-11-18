@@ -34,7 +34,7 @@ class NewTweet extends Component {
       let data = await response.json();
       this.setState({ redirect: '/tweets'});
     } catch(err) {
-      alert(err);
+      alert("You need to Log in before you can tweet!");
     }
     
   }

@@ -25,7 +25,6 @@ class Tweets extends Component {
     try {
       let response = await fetch("./api/tweets");
       let data = await response.json();
-      console.log(data.tweets);
       this.setState({tweets: data.tweets});
     } catch (err) {
       alert(err);
