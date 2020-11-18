@@ -18,8 +18,8 @@ const Home = props => (
           <Switch>
             <Route exact path="/users" component={ Users } />
             <Route exact path="/newTweet" component={ NewTweet }/>
-            <Route exact path="/login" component={ Login }/>
             <Route exact path="/tweets" component ={ Tweets } />
+            <Route path = "/" component={ Login }/>
           </Switch>
         </div>
     </Router>

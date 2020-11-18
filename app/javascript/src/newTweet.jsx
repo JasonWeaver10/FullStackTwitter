@@ -14,7 +14,7 @@ class NewTweet extends Component {
     this.newTweetBody = this.newTweetBody.bind(this);
   }
 
-  newTweetRequest(e) {
+  async newTweetRequest(e) {
     e.preventDefault();
     const csrfToken = document.querySelector("[name='csrf-token']").content;
 
@@ -29,10 +29,14 @@ class NewTweet extends Component {
                             }
                           })
     };
-    fetch('./api/tweets', requestOptions)
-      .then(response => response.json())
+    try {
+      let response = await fetch('./api/tweets', requestOptions)
+      let data = await response.json();
+      this.setState({ redirect: '/tweets'});
+    } catch(err) {
+      alert(err);
+    }
     
-    this.setState({ redirect: '/tweets'});
   }
 
   newTweetBody(e) {
