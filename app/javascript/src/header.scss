@@ -44,7 +44,8 @@
       color: white;
       border-radius: 50px;
       box-shadow: 3px 3px #888888;
-      width: 100px;
+      width: 120px;
+      font-weight: 600;
 
       &:hover {
         color: blueviolet;
@@ -82,6 +83,11 @@
     .newLink {
       grid-column-start: 4;
       grid-row-start: 2;
+    }
+
+    .headerUsername {
+      grid-column-start: 5;
+      grid-row-start: 1;
     }
   }
 }

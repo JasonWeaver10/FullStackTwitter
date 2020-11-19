@@ -8,7 +8,7 @@ class Login extends Component {
                   password: '',
                   email: '',
                   loginUserName: '',
-                  loginPassword: ''
+                  loginPassword: '',
                   };
   
     this.handleChange = this.handleChange.bind(this);
@@ -46,6 +46,7 @@ class Login extends Component {
       body: JSON.stringify(newUser)
     })
     this.resetDefaults();
+    alert("Thanks for signing up for JTwitter!, Please log in to start Tweeting!");
   };
 
   handleChange(e) {
@@ -55,7 +56,7 @@ class Login extends Component {
    });
   };
 
-  handleLogin(e) {
+  async handleLogin(e) {
     e.preventDefault();
     let returningUser = {
       user: {
@@ -65,7 +66,8 @@ class Login extends Component {
     };
     const csrfToken = document.querySelector("[name='csrf-token']").content;
 
-    fetch('https://jasonfullstacktwitter.herokuapp.com/api/sessions', {
+    try {
+    await fetch('./api/sessions', {
       method: 'post',
       headers: {
         'X-CSRF-Token': csrfToken,
@@ -73,7 +75,21 @@ class Login extends Component {
       },
       body: JSON.stringify(returningUser)
     })
-    this.resetDefaults();  
+
+    let response = await fetch('./api/authenticated')
+    let data = await response.json();
+    if (data.authenticated == true) {
+      alert(`Thanks ${data.username} You have successfully logged in!`)
+      window.location = '/tweets';
+
+    } else {
+      alert("Username or Password Incorrect, please try again");
+    }
+    } catch(err) {
+      console.log(err);
+    }
+    this.resetDefaults();
+
   };
   
 

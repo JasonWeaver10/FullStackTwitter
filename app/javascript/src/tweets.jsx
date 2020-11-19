@@ -9,27 +9,41 @@ class Tweets extends Component {
     this.state = {
       tweets: [],
     }
-
+    this.handleDeleteButton = this.handleDeleteButton.bind(this);
     this.showUserTweets = this.showUserTweets.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.fetchTweet = this.fetchTweet.bind(this);
   }
 
+  handleDeleteButton() {
+    let deleteButtons = document.querySelectorAll('.delete');
+    console.log(deleteButtons);
+    deleteButtons.forEach((item) => {
+      if(this.props.currentUser != item.dataset.name) {
+        item.classList.add('hidden');
+      } else {
+      }
+    })
+  }
+
   async fetchTweet() {
     let reset = document.querySelector('.resetButton');
     let userButton = document.querySelectorAll('.userButton');
+
     reset.classList.add("hidden");
     userButton.forEach((item) => {
       item.classList.remove("hidden");
     })
+
     try {
       let response = await fetch("./api/tweets");
       let data = await response.json();
-      this.setState({tweets: data.tweets});
+      await this.setState({tweets: data.tweets});
+      this.handleDeleteButton();
+
     } catch (err) {
       alert(err);
     }
-   
   };
 
   async handleDelete(e) {
@@ -47,6 +61,7 @@ class Tweets extends Component {
         },
       })
       this.fetchTweet();
+
     } catch(err) {
       alert(err);
     }
@@ -55,11 +70,21 @@ class Tweets extends Component {
   async showUserTweets(e) {
     let reset = document.querySelector('.resetButton');
     let userButton = document.querySelectorAll('.userButton');
+    let deleteButton = document.querySelectorAll('.delete');
     userButton.forEach((item) => {
       item.classList.add("hidden")
     });
     reset.classList.remove("hidden");
     let userTweets = e.target.dataset.id;
+    if(this.props.currentUser === userTweets) {
+      deleteButton.forEach((item) => {
+        item.classList.remove('hidden');
+      })
+    } else {
+      deleteButton.forEach((item) => {
+        item.classList.add('hidden');
+      })
+    }
     try {
       let response = await fetch("./api/users/" + userTweets + "/tweets");
       let data = await response.json();
@@ -84,7 +109,7 @@ class Tweets extends Component {
           <div className="tweet" key= {tweet.id}>
             <h2 > {tweet.username}</h2>
             <h4>{tweet.message}</h4>
-            <button className="delete" data-id={tweet.id} onClick={this.handleDelete}>Delete</button>
+            <button className="delete" data-id={tweet.id} data-name={tweet.username} onClick={this.handleDelete}>Delete</button>
             <button className="userButton" data-id={tweet.username} onClick={this.showUserTweets}> See More From {tweet.username} </button>
           </div>
            )}
